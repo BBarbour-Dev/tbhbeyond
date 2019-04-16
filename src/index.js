@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 import "bulmaswatch/lux/bulmaswatch.min.css";
+import "./helpers.css";
 
 import App from "./components/App";
 import Firebase from "./config/firebase";

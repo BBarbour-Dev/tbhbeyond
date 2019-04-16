@@ -2,6 +2,8 @@ import React, { useState, useContext } from "react";
 import { FirebaseContext } from "../../config/context";
 import { withRouter } from "react-router-dom";
 
+import { defaultAvatar } from "../../config/constants";
+
 const LoginForm = ({ history, toggle }) => {
   const firebase = useContext(FirebaseContext);
   const [username, setUsername] = useState("");
@@ -27,7 +29,19 @@ const LoginForm = ({ history, toggle }) => {
           {
             username,
             email,
-            role: ""
+            avatar: defaultAvatar,
+            joined: new Date(),
+            role: "user",
+            about: {
+              location: "",
+              website: "",
+              social: {
+                facebook: "",
+                instagram: "",
+                twitter: ""
+              },
+              bio: ""
+            }
           },
           { merge: true }
         );

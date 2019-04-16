@@ -55,7 +55,7 @@ const ForgetForm = ({ toggle, login }) => {
         disabled={validation}
         type="submit"
         className="button is-fullwidth"
-        value="Login"
+        value="Recover Password"
       />
     </form>
   );

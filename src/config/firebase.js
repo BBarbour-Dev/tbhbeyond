@@ -1,6 +1,7 @@
 import app from "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
+import "firebase/storage";
 
 const config = {
   apiKey: process.env.REACT_APP_API_KEY,
@@ -16,6 +17,7 @@ class Firebase {
     app.initializeApp(config);
     this.auth = app.auth();
     this.db = app.firestore();
+    this.storage = app.storage();
   }
 
   // AUTH API
@@ -33,7 +35,7 @@ class Firebase {
   updateUserPassword = password =>
     this.auth.currentUser.updatePassword(password);
 
-  //MERGE AUTH AND DB USER
+  // MERGE AUTH AND DB USER
 
   onAuthListener = (next, fallback) => {
     this.auth.onAuthStateChanged(userAuth => {
@@ -44,12 +46,10 @@ class Firebase {
           .get()
           .then(snapshot => {
             const dbUser = snapshot.data();
-            if (!dbUser.role) {
-              dbUser.role = "";
-            }
             userAuth = {
               uid: userAuth.uid,
               email: userAuth.email,
+              avatar: userAuth.avatar,
               ...dbUser
             };
             next(userAuth);
@@ -60,10 +60,15 @@ class Firebase {
     });
   };
 
-  //USER API
-  user = uid => this.db.doc(`users/${uid}`);
+  // USER API
+  user = uid => this.db.collection("users").doc(`${uid}`);
 
   users = () => this.db.collection("users");
+
+  // STORAGE API
+  uploadAvatar = file => this.storage.ref(`avatars/${file.name}`).put(file);
+
+  avatars = () => this.storage.ref("avatars");
 }
 
 export default Firebase;

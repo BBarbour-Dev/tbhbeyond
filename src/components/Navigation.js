@@ -7,8 +7,8 @@ import { FirebaseContext } from "../config/context";
 import { LoginModal, RegisterModal, ForgetModal } from "./auth/modals";
 
 const Navigation = props => {
+  const [user] = useAuth();
   const firebase = useContext(FirebaseContext);
-  const [user] = useAuth(firebase);
   const [burgerOpen, setBurgerOpen] = useState(false);
   const burgerActive = burgerOpen ? "is-active" : null;
   return (
@@ -29,32 +29,22 @@ const Navigation = props => {
         </div>
 
         <div className={`navbar-menu ${burgerActive}`}>
-          <div className="navbar-start">
-            <Link className="navbar-item" to="/">
-              Link
-            </Link>
-            <Link className="navbar-item" to="/">
-              Link
-            </Link>
-          </div>
-          {user ? (
-            <NavEndLoggedIn user={user} firebase={firebase} />
-          ) : (
-            <NavEndLoggedOut />
-          )}
+          {user ? <NavEndLoggedIn firebase={firebase} /> : <NavEndLoggedOut />}
         </div>
       </div>
     </nav>
   );
 };
 
-const NavEndLoggedIn = ({ user, firebase }) => {
+const NavEndLoggedIn = ({ firebase }) => {
+  const [user] = useAuth();
   return (
     <div className="navbar-end">
-      <a href="#" className="navbar-item">
+      <Link className="navbar-item" to={`/user/${user.uid}/${user.username}`}>
+        <i className="fa fa-user" style={{ marginRight: "0.5rem" }} />{" "}
         {user.username}
-      </a>
-      <a href="#" className="navbar-item" onClick={firebase.logoutUser}>
+      </Link>
+      <a href="#!" className="navbar-item" onClick={firebase.logoutUser}>
         Logout
       </a>
     </div>
