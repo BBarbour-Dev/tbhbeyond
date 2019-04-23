@@ -13,6 +13,14 @@ body {
   flex: 1;
 }
 
+.mb1 {
+  margin-bottom: 1rem;
+}
+
+.mb2 {
+  margin-bottom: 2rem;
+}
+
 .mt-half {
   margin-top: 0.5rem;
 }
@@ -47,4 +55,47 @@ body {
 
 .footer-special {
   padding: 3rem 1.5rem 6rem;
+}
+
+.square-input {
+  width: 4rem;
+  text-align: center;
+}
+
+.rect-input {
+  width: 6rem;
+  text-align: center;
+}
+
+.dice-button {
+  cursor: pointer;
+  background: none;
+  font-size: 100%;
+  font-family: inherit;
+  border: 0;
+  padding: 0;
+}
+
+.edit-item-button {
+  cursor: pointer;
+  background: none;
+  font-size: 100%;
+  font-family: inherit;
+  border: 0;
+  padding: 9;
+}
+
+.center-buttons {
+  display: flex;
+  justify-content: center;
+}
+
+.content-gap {
+  margin-top: 3rem;
+}
+
+@media only screen and (max-width: 768px) {
+  .content-gap {
+    margin-top: 0;
+  }
 }

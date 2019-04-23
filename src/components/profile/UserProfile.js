@@ -33,9 +33,9 @@ const UserProfile = ({ location }) => {
     profile === "none" ? (
       <Redirect to="/none" />
     ) : (
-      <section className="mt3">
+      <section className="content-gap">
         <div className="container">
-          <div className="columns is-centered is-mobile">
+          <div className="columns is-centered">
             <div
               className="column is-four-fifths box"
               style={{ padding: "3rem" }}
@@ -106,21 +106,21 @@ const SocialMedia = ({ links }) => {
     <p className="is-size-4">
       {links.facebook ? (
         <a href={links.facebook}>
-          <i className="fab fa-facebook-square has-text-info" />
+          <i className="fab fa-facebook-square has-text-danger" />
         </a>
       ) : (
         <i className="fab fa-facebook-square" />
       )}
       {links.instagram ? (
         <a href={links.instagram}>
-          <i className="fab fa-instagram has-text-info" />
+          <i className="fab fa-instagram has-text-danger" />
         </a>
       ) : (
         <i className="fab fa-instagram" />
       )}
       {links.twitter ? (
         <a href={links.twitter}>
-          <i className="fab fa-twitter-square has-text-info" />
+          <i className="fab fa-twitter-square has-text-danger" />
         </a>
       ) : (
         <i className="fab fa-twitter-square" />
@@ -133,7 +133,7 @@ const EditButton = ({ current }) => {
   return (
     <div className="has-text-centered">
       {current ? (
-        <Link className="button is-primary" to="/edit-profile">
+        <Link className="button is-danger" to="/edit-profile">
           Edit Profile
         </Link>
       ) : null}

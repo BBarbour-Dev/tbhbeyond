@@ -22,43 +22,43 @@ const LoginForm = ({ history, toggle }) => {
   };
   const handleSumbit = e => {
     e.preventDefault();
-    firebase
-      .createNewUser(email, password)
-      .then(authUser => {
-        firebase.user(authUser.user.uid).set(
-          {
-            username,
-            email,
-            avatar: defaultAvatar,
-            joined: new Date(),
-            role: "user",
-            about: {
-              location: "",
-              website: "",
-              social: {
-                facebook: "",
-                instagram: "",
-                twitter: ""
-              },
-              bio: ""
-            }
-          },
-          { merge: true }
-        );
-      })
-      .then(() => {
-        cleanUp();
-      })
-      .catch(err => {
-        setError(err);
-      });
+    if (password === passwordTwo) {
+      firebase
+        .createNewUser(email, password)
+        .then(authUser => {
+          firebase.user(authUser.user.uid).set(
+            {
+              username,
+              email,
+              avatar: defaultAvatar,
+              joined: new Date(),
+              role: "user",
+              about: {
+                location: "",
+                website: "",
+                social: {
+                  facebook: "",
+                  instagram: "",
+                  twitter: ""
+                },
+                bio: ""
+              }
+            },
+            { merge: true }
+          );
+        })
+        .then(() => {
+          cleanUp();
+        })
+        .catch(err => {
+          setError(err);
+        });
+    } else {
+      setError({ message: "Passwords must match." });
+    }
   };
   const validation =
-    password !== passwordTwo ||
-    username === "" ||
-    email === "" ||
-    password === "" ||
-    passwordTwo === "";
+    username === "" || email === "" || password === "" || passwordTwo === "";
   return (
     <form onSubmit={handleSumbit}>
       <div className="field">

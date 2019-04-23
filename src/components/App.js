@@ -9,6 +9,7 @@ import UserProfile from "./profile/UserProfile";
 import Error404 from "./Error404";
 import Footer from "./Footer";
 import EditProfile from "./profile/EditProfile";
+import NewCharacter from "./charactercreation/NewCharacter";
 
 const App = () => {
   return (
@@ -20,6 +21,7 @@ const App = () => {
             <Route exact path="/" component={Landing} />
             <Route path="/user/:uid/:username" component={UserProfile} />
             <AuthRoute path="/edit-profile" component={EditProfile} />
+            <AuthRoute path="/new-character" component={NewCharacter} />
             <Route component={Error404} />
           </Switch>
         </div>

@@ -39,15 +39,32 @@ const Navigation = props => {
 const NavEndLoggedIn = ({ firebase }) => {
   const [user] = useAuth();
   return (
-    <div className="navbar-end">
-      <Link className="navbar-item" to={`/user/${user.uid}/${user.username}`}>
-        <i className="fa fa-user" style={{ marginRight: "0.5rem" }} />{" "}
-        {user.username}
-      </Link>
-      <a href="#!" className="navbar-item" onClick={firebase.logoutUser}>
-        Logout
-      </a>
-    </div>
+    user && (
+      <div className="navbar-end">
+        <div className="navbar-item has-dropdown is-hoverable">
+          <span className="navbar-link">
+            <i className="fa fa-user" style={{ marginRight: "0.5rem" }} />{" "}
+            Account
+          </span>
+
+          <div className="navbar-dropdown">
+            <Link
+              className="navbar-item"
+              to={`/user/${user.uid}/${user.username}`}
+            >
+              Profile
+            </Link>
+            <Link className="navbar-item" to="/edit-profile">
+              Edit Profile
+            </Link>
+          </div>
+        </div>
+
+        <a href="#!" className="navbar-item" onClick={firebase.logoutUser}>
+          Logout
+        </a>
+      </div>
+    )
   );
 };
 
