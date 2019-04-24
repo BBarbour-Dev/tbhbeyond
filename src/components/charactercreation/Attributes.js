@@ -20,7 +20,7 @@ const Attributes = ({ char }) => {
     <div className="column">
       <div className="columns is-centered">
         <div className="column is-four-fifths has-text-centered">
-          <h2 className="is-size-4 mb2">Attribute Scores</h2>
+          <h2 className="is-size-3 mb2">Attribute Scores</h2>
         </div>
       </div>
       <div className="columns is-centered is-mobile">

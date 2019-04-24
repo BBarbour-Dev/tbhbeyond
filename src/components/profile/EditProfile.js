@@ -21,16 +21,16 @@ const EditProfile = () => {
             >
               <h1 className="is-size-3">Edit Profile</h1>
               <hr />
-              <h2 className="is-size-5 mb1">Avatar</h2>
+              <h3 className="is-size-3 mb1">Avatar</h3>
               <ChangeAvatar firebase={firebase} user={user} />
               <hr />
-              <h2 className="is-size-5 mb1">About</h2>
+              <h3 className="is-size-3 mb1">About</h3>
               <ChangeAbout firebase={firebase} user={user} />
               <hr />
-              <h2 className="is-size-5 mb1">Change Password</h2>
+              <h3 className="is-size-3 mb1">Change Password</h3>
               <ChangePassword firebase={firebase} />
               <hr />
-              <h2 className="is-size-5 mb1">Change Email</h2>
+              <h3 className="is-size-3 mb1">Change Email</h3>
               <ChangeEmail user={user} firebase={firebase} />
             </div>
           </div>

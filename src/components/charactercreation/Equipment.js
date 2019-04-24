@@ -12,7 +12,7 @@ const Inventory = ({ char }) => {
     <div className="column">
       <div className="columns is-centered">
         <div className="column is-four-fifths has-text-centered">
-          <h2 className="is-size-4 mb2">Equipment</h2>
+          <h2 className="is-size-2 mb2">Equipment</h2>
           <div className="field">
             <div className="control">
               <textarea
@@ -37,6 +37,19 @@ const Inventory = ({ char }) => {
             value={character.coins}
             onChange={e =>
               setCharacter({ ...character, coins: e.target.value })
+            }
+          />
+        </div>
+        <div className="column is-one-fifth has-text-centered">
+          <label>
+            <h3 className="is-size-6">Armor Value</h3>
+          </label>
+          <input
+            type="number"
+            className="input rect-input"
+            value={character.armorValue}
+            onChange={e =>
+              setCharacter({ ...character, armorValue: e.target.value })
             }
           />
         </div>

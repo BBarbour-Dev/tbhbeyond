@@ -7,11 +7,11 @@ const Background = ({ char }) => {
     <div className="column">
       <div className="columns is-centered">
         <div className="column is-four-fifths has-text-centered">
-          <h2 className="is-size-4 mb1">Roleplay Details</h2>
+          <h2 className="is-size-3 mb1">Roleplay Details</h2>
           <div className="field">
             <div className="control mb2">
               <label>
-                <h3 className="is-size-6 mb2">Name</h3>
+                <h3 className="is-size-6">Name</h3>
               </label>
               <input
                 type="text"

@@ -1,4 +1,5 @@
 import React, { useState, useContext } from "react";
+import { withRouter } from "react-router-dom";
 import { FirebaseContext } from "../../config/context";
 import useAuth from "../../hooks/useAuth";
 
@@ -7,10 +8,11 @@ import CharClass from "./CharClass";
 import Background from "./Background";
 import Equipment from "./Equipment";
 import Spells from "./Spells";
+import Review from "./Review";
 
-import { CharacterSchema } from "./characterschema";
+import { CharacterSchema } from "../../blackhackinfo/characterschema";
 
-const NewCharacter = () => {
+const NewCharacter = ({ history }) => {
   const firebase = useContext(FirebaseContext);
   const [user] = useAuth();
   const [character, setCharacter] = useState(CharacterSchema);
@@ -28,14 +30,17 @@ const NewCharacter = () => {
     <CharClass char={[character, setCharacter]} />,
     <Background char={[character, setCharacter]} />,
     <Equipment char={[character, setCharacter]} />,
-    <Spells char={[character, setCharacter]} />
+    <Spells char={[character, setCharacter]} />,
+    <Review
+      char={[character, setCharacter]}
+      firebase={firebase}
+      user={user}
+      history={history}
+      schema={CharacterSchema}
+    />
   ];
   const backDisable = currentStep === 0;
   const nextDisable = currentStep === stepsArr.length - 1;
-
-  const handleSubmit = e => {
-    e.preventDefault();
-  };
   return (
     user && (
       <section className="content-gap">
@@ -45,7 +50,7 @@ const NewCharacter = () => {
               className="column is-three-fifths box"
               style={{ padding: "3rem" }}
             >
-              <h1 className="is-size-3 mb2">New Character</h1>
+              <h1 className="is-size-2 mb2">New Character</h1>
               <div className="columns is-centered">
                 <div className="column is-four-fifths ">
                   <button
@@ -69,9 +74,7 @@ const NewCharacter = () => {
                 </div>
               </div>
               <hr className="mt1 mb1" />
-              <form onSubmit={handleSubmit}>
-                <div className="columns">{stepsArr[currentStep]}</div>
-              </form>
+              <div className="columns">{stepsArr[currentStep]}</div>
             </div>
           </div>
         </div>
@@ -80,4 +83,4 @@ const NewCharacter = () => {
   );
 };
 
-export default NewCharacter;
+export default withRouter(NewCharacter);

@@ -67,26 +67,26 @@ const ProfileTop = ({ profile, current }) => {
         </figure>
       </div>
       <article className="has-text-centered mt2">
-        <h1 className="title">{profile.username}</h1>
-        {current ? <h2 className="subtitle">{profile.email}</h2> : null}
+        <h1 className="is-size-1">{profile.username}</h1>
+        {current ? <p className="is-size-4">{profile.email}</p> : null}
       </article>
       <hr />
       <div className="columns is-centered is-mobile">
         <div className="column">
           <article className="has-text-centered">
-            <h3 className="is-size-6 mt1">Joined</h3>
+            <h3 className="is-size-4 mt1">Joined</h3>
             <p>{joined}</p>
-            <h3 className="is-size-6 mt1">Location</h3>
+            <h3 className="is-size-4 mt1">Location</h3>
             {profile.about.location ? profile.about.location : "Unknown"}
-            <h3 className="is-size-6 mt1">Website</h3>
+            <h3 className="is-size-4 mt1">Website</h3>
             {profile.about.website ? (
               <a href={profile.about.website}>{profile.about.website}</a>
             ) : (
               "Unknown"
             )}
-            <h3 className="is-size-6 mt1">Social Media</h3>
+            <h3 className="is-size-4 mt1">Social Media</h3>
             <SocialMedia links={profile.about.social} />
-            <h3 className="is-size-6 mt1">Bio</h3>
+            <h3 className="is-size-4 mt1">Bio</h3>
             <p>
               {profile.about.bio ? (
                 profile.about.bio
@@ -133,7 +133,7 @@ const EditButton = ({ current }) => {
   return (
     <div className="has-text-centered">
       {current ? (
-        <Link className="button is-danger" to="/edit-profile">
+        <Link className="button is-danger is-outlined" to="/edit-profile">
           Edit Profile
         </Link>
       ) : null}

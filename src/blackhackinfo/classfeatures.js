@@ -1,6 +1,10 @@
 export const FeatureData = {
   warrior: [
     {
+      feature: "Weapons and Armor",
+      description: "Any and all."
+    },
+    {
       feature: "Self Reliant",
       description:
         "When rolling a Broken Armor Die you may reroll results of 1."
@@ -17,6 +21,11 @@ export const FeatureData = {
     }
   ],
   thief: [
+    {
+      feature: "Weapons and Armor",
+      description:
+        "All one-handed swords, all bows, daggers, cloth, leather, small shield."
+    },
     {
       feature: "Rougish Talents",
       description:
@@ -45,6 +54,11 @@ export const FeatureData = {
   ],
   cleric: [
     {
+      feature: "Weapons and Armor",
+      description:
+        "All blunt weapons, cloth, leather, mail, all helmets, all shields."
+    },
+    {
       feature: "Banish Undead",
       description:
         "You may spend an Action to Banish all Nearby undead by testing WIS and adding the Creature's HD to the roll."
@@ -66,6 +80,10 @@ export const FeatureData = {
     }
   ],
   wizard: [
+    {
+      feature: "Weapons and Armor",
+      description: "Cloth, one-handed sword, staff, dagger."
+    },
     {
       feature: "Arcane Fortune",
       description:

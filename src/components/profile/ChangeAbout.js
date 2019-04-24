@@ -134,7 +134,7 @@ const ChangeAbout = ({ firebase, user }) => {
           )}
           <button
             type="submit"
-            className={`button is-small is-danger ${loadingButton}`}
+            className={`button is-small is-danger is-outlined ${loadingButton}`}
           >
             Upload
           </button>

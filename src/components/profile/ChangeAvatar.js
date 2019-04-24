@@ -97,7 +97,7 @@ const ChangeAvatar = ({ firebase, user }) => {
               <button
                 disabled={file === null}
                 type="submit"
-                className={`button is-small is-danger ${loadingButton}`}
+                className={`button is-small is-danger is-outlined ${loadingButton}`}
               >
                 Upload
               </button>

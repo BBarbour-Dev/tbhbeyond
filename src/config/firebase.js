@@ -71,6 +71,9 @@ class Firebase {
   uploadAvatar = file => this.storage.ref(`avatars/${file.name}`).put(file);
 
   avatars = () => this.storage.ref("avatars");
+
+  //CHARACTER API
+  addCharacter = character => this.db.collection("characters").add(character);
 }
 
 export default Firebase;

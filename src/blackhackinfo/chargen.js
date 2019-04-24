@@ -1,5 +1,8 @@
 const roll3d6 = () => {
-  return Math.floor(Math.random() * (18 - 3)) + 3;
+  const dieOne = Math.floor(Math.random() * 6) + 1;
+  const dieTwo = Math.floor(Math.random() * 6) + 1;
+  const dieThree = Math.floor(Math.random() * 6) + 1;
+  return dieOne + dieTwo + dieThree;
 };
 
 export const rollStats = () => {
@@ -36,29 +39,58 @@ export const rollStartingHP = charClass => {
 export const startingHitDie = charClass => {
   switch (charClass) {
     case "warrior":
-      return "1d8";
+      return "d8";
     case "thief":
-      return "1d6";
+      return "d6";
     case "cleric":
-      return "1d8";
+      return "d8";
     case "wizard":
-      return "1d4";
+      return "d4";
     default:
-      return "1d4";
+      return "d4";
   }
 };
 
 export const startingDmgDie = charClass => {
   switch (charClass) {
     case "warrior":
-      return "1d6*";
+      return "d6*";
     case "thief":
-      return "1d6";
+      return "d6";
     case "cleric":
-      return "1d8";
+      return "d8";
     case "wizard":
-      return "1d4";
+      return "d4";
     default:
-      return "1d4";
+      return "d4";
   }
+};
+
+export const validateCharacter = character => {
+  const errors = [];
+  !character.name && errors.push("Your character needs a name.");
+  !character.background && errors.push("Your character needs a background.");
+  !character.charClass && errors.push("Your character needs a class.");
+  if (character.maxHP < 1 || character.maxHP > 11) {
+    errors.push("Your HP is incorrect.");
+  }
+  if (character.str < 3 || character.str > 18) {
+    errors.push("Your STR must be between 3 and 18");
+  }
+  if (character.dex < 3 || character.dex > 18) {
+    errors.push("Your DEX must be between 3 and 18");
+  }
+  if (character.con < 3 || character.con > 18) {
+    errors.push("Your CON must be between 3 and 18");
+  }
+  if (character.int < 3 || character.int > 18) {
+    errors.push("Your INT must be between 3 and 18");
+  }
+  if (character.wis < 3 || character.wis > 18) {
+    errors.push("Your WIS must be between 3 and 18");
+  }
+  if (character.cha < 3 || character.cha > 18) {
+    errors.push("Your CHA must be between 3 and 18");
+  }
+  return errors;
 };

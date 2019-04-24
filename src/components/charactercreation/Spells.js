@@ -12,7 +12,7 @@ const Spells = ({ char }) => {
     <div className="column">
       <div className="columns is-centered">
         <div className="column is-four-fifths has-text-centered">
-          <h2 className="is-size-4 mb2">Spells and Prayers</h2>
+          <h2 className="is-size-3 mb2">Spells and Prayers</h2>
           {notSpellcaster && (
             <div className="notification">
               Your class cannot learn spells or prayers.
@@ -156,7 +156,10 @@ const AddSpellModal = ({ toggle, char, option }) => {
               />
             </div>
           </div>
-          <button className="button is-fullwidth" onClick={handleSubmit}>
+          <button
+            className="button is-fullwidth is-outlined is-danger"
+            onClick={handleSubmit}
+          >
             Submit
           </button>
         </section>
@@ -229,7 +232,10 @@ const EditSpellModal = ({ toggleEdit, char, index }) => {
               />
             </div>
           </div>
-          <button className="button is-fullwidth" onClick={handleSubmit}>
+          <button
+            className="button is-fullwidth is-outlined is-danger"
+            onClick={handleSubmit}
+          >
             Submit
           </button>
         </section>

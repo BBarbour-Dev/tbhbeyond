@@ -44,7 +44,7 @@ const CharClass = ({ char }) => {
     <div className="column">
       <div className="columns is-centered">
         <div className="column is-four-fifths has-text-centered">
-          <h2 className="is-size-4 mb2">Choose Class</h2>
+          <h2 className="is-size-2 mb2">Choose Class</h2>
           <div className="buttons mb1 center-buttons">
             <ClassButton
               name={"warrior"}
@@ -99,7 +99,7 @@ const CharClass = ({ char }) => {
         </div>
         <div className="column is-one-fifth has-text-centered">
           <label>
-            <h3 className="is-size-6">Dmg Die</h3>
+            <h3 className="is-size-6">Attack Damage</h3>
           </label>
           <input
             disabled
