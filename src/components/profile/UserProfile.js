@@ -1,13 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { FirebaseContext } from "../../config/context";
-import { Redirect } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import moment from "moment";
 
 import Loader from "../Loader";
 
-const UserProfile = ({ location }) => {
+const UserProfile = ({ location, history }) => {
   const [user] = useAuth();
   const firebase = useContext(FirebaseContext);
   const profileUID = location.pathname.split("/")[2];
@@ -20,34 +19,32 @@ const UserProfile = ({ location }) => {
       .then(snapshot => {
         const profileData = snapshot.data();
         if (!profileData) {
-          setProfile("none");
+          history.push("/none");
+        } else {
+          setProfile(profileData);
         }
-        setProfile(profileData);
         if (user) {
           setCurrent(profileUID === user.uid);
         }
       });
     return () => datafetch;
   }, []);
-  const loaded =
-    profile === "none" ? (
-      <Redirect to="/none" />
-    ) : (
-      <section className="content-gap">
-        <div className="container">
-          <div className="columns is-centered">
-            <div
-              className="column is-four-fifths box"
-              style={{ padding: "3rem" }}
-            >
-              <ProfileTop profile={profile} current={current} />
-              <EditButton current={current} />
-            </div>
+  const loaded = (
+    <section className="content-gap">
+      <div className="container">
+        <div className="columns is-centered">
+          <div
+            className="column is-three-fifths box"
+            style={{ padding: "3rem" }}
+          >
+            <ProfileTop profile={profile} current={current} />
+            <EditButton current={current} />
           </div>
         </div>
-      </section>
-    );
-  return !profile ? <Loader /> : loaded;
+      </div>
+    </section>
+  );
+  return profile ? loaded : <Loader />;
 };
 
 const ProfileTop = ({ profile, current }) => {

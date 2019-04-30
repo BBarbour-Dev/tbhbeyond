@@ -1,54 +1,46 @@
 import React, { useState } from "react";
 
-const Spells = ({ char }) => {
+const SpellDisplay = ({ char, editable }) => {
   const [character, setCharacter] = char;
-  const [addSpellModal, setAddSpellModal] = useState(false);
-  const notSpellcaster =
-    character.charClass === "warrior" ||
-    character.charClass === "thief" ||
-    character.charClass === "";
   const option = character.charClass === "cleric" ? "Prayer" : "Spell";
+  const [addSpellModal, setAddSpellModal] = useState(false);
   return (
-    <div className="column">
-      <div className="columns is-centered">
-        <div className="column is-four-fifths has-text-centered">
-          <h2 className="is-size-3 mb2">Spells and Prayers</h2>
-          {notSpellcaster && (
-            <div className="notification">
-              Your class cannot learn spells or prayers.
-            </div>
-          )}
-          <button
-            disabled={notSpellcaster}
-            className="button is-pulled-right is-outlined is-danger mb1"
-            onClick={e => setAddSpellModal(!addSpellModal)}
-          >
-            Add {option}
-          </button>
-          <table className="table is-striped is-fullwidth">
-            <tbody>
-              <tr>
-                <th>Level</th>
-                <th>Name</th>
-                <th style={{ width: "50%" }}>Effect</th>
+    <>
+      <h3 className="is-size-4 mb1">{`${option}s`}</h3>
+      {editable ? (
+        <button
+          className="button is-pulled-right is-outlined is-danger mb1"
+          onClick={e => setAddSpellModal(!addSpellModal)}
+        >
+          Add {option}
+        </button>
+      ) : null}
+      <table className="table is-striped is-fullwidth">
+        <tbody>
+          <tr>
+            <th>Level</th>
+            <th>Name</th>
+            <th style={{ width: "50%" }}>Effect</th>
+            {editable ? (
+              <>
                 <th>Edit</th>
                 <th>Delete</th>
-              </tr>
-              <SpellList char={[character, setCharacter]} />
-            </tbody>
-          </table>
-        </div>
-      </div>
+              </>
+            ) : null}
+          </tr>
+          <SpellList char={[character, setCharacter]} editable={editable} />
+        </tbody>
+      </table>
       <AddSpellModal
         toggle={[addSpellModal, setAddSpellModal]}
         char={[character, setCharacter]}
         option={option}
       />
-    </div>
+    </>
   );
 };
 
-const SpellList = ({ char }) => {
+const SpellList = ({ char, editable, firebase, charID }) => {
   const [character, setCharacter] = char;
   const [editSpellModal, setEditSpellModal] = useState(false);
   const handleDelete = deleteIndex => {
@@ -56,6 +48,7 @@ const SpellList = ({ char }) => {
       (spell, index) => index !== deleteIndex
     );
     setCharacter({ ...character, spells: newSpellList });
+    firebase.character(charID).set(character, { merge: true });
   };
   return (
     <>
@@ -65,27 +58,33 @@ const SpellList = ({ char }) => {
             <td>{spell.level}</td>
             <td>{spell.name}</td>
             <td>{spell.effect}</td>
-            <td>
-              <button
-                className="edit-item-button has-text-danger"
-                onClick={e => setEditSpellModal(!editSpellModal)}
-              >
-                <i className="fa fa-edit" />
-              </button>
-              <EditSpellModal
-                char={[character, setCharacter]}
-                toggleEdit={[editSpellModal, setEditSpellModal]}
-                index={index}
-              />
-            </td>
-            <td>
-              <button
-                className="edit-item-button has-text-danger"
-                onClick={e => handleDelete(index)}
-              >
-                <i className="fa fa-times-circle" />
-              </button>
-            </td>
+            {editable ? (
+              <>
+                <td>
+                  <button
+                    className="edit-item-button has-text-danger"
+                    onClick={e => setEditSpellModal(!editSpellModal)}
+                  >
+                    <i className="fa fa-edit" />
+                  </button>
+                  <EditSpellModal
+                    firebase={firebase}
+                    char={[character, setCharacter]}
+                    toggleEdit={[editSpellModal, setEditSpellModal]}
+                    index={index}
+                    charID={charID}
+                  />
+                </td>
+                <td>
+                  <button
+                    className="edit-item-button has-text-danger"
+                    onClick={e => handleDelete(index)}
+                  >
+                    <i className="fa fa-times-circle" />
+                  </button>
+                </td>
+              </>
+            ) : null}
           </tr>
         );
       })}
@@ -98,13 +97,22 @@ const AddSpellModal = ({ toggle, char, option }) => {
   const spellSchema = { level: 1, name: "", effect: "" };
   const [newSpell, setNewSpell] = useState(spellSchema);
   const [character, setCharacter] = char;
-  const validation = newSpell.name === "" || newSpell.effect === "";
+  const validation = (newSpell.level =
+    "" ||
+    newSpell.level < 0 ||
+    newSpell.level > 10 ||
+    newSpell.name === "" ||
+    newSpell.effect === "");
   const closeModal = () => {
     setAddSpellModal(!addSpellModal);
   };
   const handleSubmit = () => {
     const spellList = character.spells;
-    setCharacter({ ...character, spells: [...spellList, newSpell] });
+    setCharacter({
+      ...character,
+      spells: [...spellList, newSpell],
+      lastUpdatedDate: new Date()
+    });
     setNewSpell(spellSchema);
     closeModal();
   };
@@ -122,7 +130,6 @@ const AddSpellModal = ({ toggle, char, option }) => {
             <div className="control">
               <label className="label">Level</label>
               <input
-                disabled
                 className="input square-input"
                 type="number"
                 value={newSpell.level}
@@ -174,16 +181,24 @@ const AddSpellModal = ({ toggle, char, option }) => {
 const EditSpellModal = ({ toggleEdit, char, index }) => {
   const [character, setCharacter] = char;
   const [editSpellModal, setEditSpellModal] = toggleEdit;
-  const [editedSpell, setEditedSpell] = useState(character.spells[index]);
-  const validation = editedSpell.name === "" || editedSpell.effect === "";
+  const [spell, setSpell] = useState(character.spells[index]);
+  const validation =
+    spell.level === "" ||
+    spell.level < 0 ||
+    spell.level > 10 ||
+    spell.name === "" ||
+    spell.effect === "";
   const closeModal = () => {
     setEditSpellModal(!editSpellModal);
   };
   const handleSubmit = () => {
     const spellList = character.spells;
-    spellList[index] = editedSpell;
-    setCharacter({ ...character, spells: spellList });
-    setEditedSpell(character.spells[index]);
+    spellList[index] = spell;
+    setCharacter({
+      ...character,
+      spells: spellList,
+      lastUpdatedDate: new Date()
+    });
     closeModal();
   };
   const modalOpened = editSpellModal ? "is-active" : null;
@@ -192,7 +207,7 @@ const EditSpellModal = ({ toggleEdit, char, index }) => {
       <div className="modal-background" onClick={closeModal} />
       <div className="modal-card">
         <header className="modal-card-head">
-          <p className="modal-card-title">Edit {editedSpell.name}</p>
+          <p className="modal-card-title">Edit {spell.name}</p>
           <button className="delete" onClick={closeModal} />
         </header>
         <section className="modal-card-body">
@@ -200,13 +215,10 @@ const EditSpellModal = ({ toggleEdit, char, index }) => {
             <div className="control">
               <label className="label">Level</label>
               <input
-                disabled
                 className="input square-input"
                 type="number"
-                value={editedSpell.level}
-                onChange={e =>
-                  setEditedSpell({ ...editedSpell, level: e.target.value })
-                }
+                value={spell.level}
+                onChange={e => setSpell({ ...spell, level: e.target.value })}
               />
             </div>
           </div>
@@ -216,10 +228,8 @@ const EditSpellModal = ({ toggleEdit, char, index }) => {
               <input
                 type="text"
                 className="input"
-                value={editedSpell.name}
-                onChange={e =>
-                  setEditedSpell({ ...editedSpell, name: e.target.value })
-                }
+                value={spell.name}
+                onChange={e => setSpell({ ...spell, name: e.target.value })}
               />
             </div>
           </div>
@@ -228,10 +238,8 @@ const EditSpellModal = ({ toggleEdit, char, index }) => {
               <label className="label">Effect</label>
               <textarea
                 className="textarea"
-                value={editedSpell.effect}
-                onChange={e =>
-                  setEditedSpell({ ...editedSpell, effect: e.target.value })
-                }
+                value={spell.effect}
+                onChange={e => setSpell({ ...spell, effect: e.target.value })}
               />
             </div>
           </div>
@@ -249,4 +257,4 @@ const EditSpellModal = ({ toggleEdit, char, index }) => {
   );
 };
 
-export default Spells;
+export default SpellDisplay;

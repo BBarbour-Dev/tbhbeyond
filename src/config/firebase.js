@@ -74,6 +74,8 @@ class Firebase {
 
   //CHARACTER API
   addCharacter = character => this.db.collection("characters").add(character);
+
+  character = id => this.db.collection("characters").doc(`${id}`);
 }
 
 export default Firebase;

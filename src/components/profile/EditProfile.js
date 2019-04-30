@@ -16,7 +16,7 @@ const EditProfile = () => {
         <div className="container">
           <div className="columns is-centered">
             <div
-              className="column is-four-fifths box"
+              className="column is-three-fifths box"
               style={{ padding: "3rem" }}
             >
               <h1 className="is-size-3">Edit Profile</h1>

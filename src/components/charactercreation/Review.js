@@ -1,26 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import { validateCharacter } from "../../blackhackinfo/chargen";
-
-import warrior from "../../config/images/warrior.png";
-import thief from "../../config/images/thief.png";
-import cleric from "../../config/images/cleric.png";
-import wizard from "../../config/images/wizard.png";
+import ClassImg from "../ClassImg";
 
 const Review = ({ char, firebase, user, schema, history }) => {
-  console.log(typeof firebase.characters);
   const [character, setCharacter] = char;
   const [validationErrors] = useState(validateCharacter(character));
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const handleSubmit = e => {
     e.preventDefault();
-    setCharacter({
-      ...character,
-      creatorUserId: user.uid,
-      createdDate: new Date(),
-      lastUpdatedDate: new Date()
-    });
     setLoading(true);
     firebase
       .addCharacter(character)
@@ -40,7 +29,7 @@ const Review = ({ char, firebase, user, schema, history }) => {
         <div className="column is-three-fifths">
           <h2 className="is-size-3 mb1 has-text-centered mb2">Review</h2>
           {validationErrors.length === 0 ? (
-            <CharacterSummary char={[character]} />
+            <CharacterSummary char={[character, setCharacter]} user={user} />
           ) : (
             <ErrorDisplay errors={validationErrors} />
           )}
@@ -77,12 +66,20 @@ const ErrorDisplay = ({ errors }) => {
   );
 };
 
-const CharacterSummary = ({ char }) => {
-  const [character] = char;
+const CharacterSummary = ({ char, user }) => {
+  const [character, setCharacter] = char;
+  useEffect(() => {
+    setCharacter({
+      ...character,
+      creatorUserId: user.uid,
+      createdDate: new Date(),
+      lastUpdatedDate: new Date()
+    });
+  }, []);
   return (
     <>
       <h2 className="is-size-3 mb1">{character.name}</h2>
-      <ClassImg charClass={character.charClass} />
+      <ClassImg charClass={character.charClass} size={64} />
       <h3 className="is-size-4 mb1">
         Level {character.level} {character.charClass}
       </h3>
@@ -165,28 +162,6 @@ const CharacterSummary = ({ char }) => {
         </>
       )}
     </>
-  );
-};
-
-const ClassImg = ({ charClass }) => {
-  const pickClassImg = charClass => {
-    switch (charClass) {
-      case "warrior":
-        return warrior;
-      case "thief":
-        return thief;
-      case "cleric":
-        return cleric;
-      case "wizard":
-        return wizard;
-      default:
-        return null;
-    }
-  };
-  return (
-    <figure className="image is-64x64 is-inline-block mb1">
-      <img src={pickClassImg(charClass)} alt={charClass} />
-    </figure>
   );
 };
 

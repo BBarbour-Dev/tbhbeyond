@@ -17,6 +17,11 @@ h6 {
   letter-spacing: 0;
 }
 
+.os-span {
+  font-family: Oswald, sans-serif;
+  letter-spacing: 0;
+}
+
 .site {
   display: flex;
   min-height: 100vh;
@@ -25,6 +30,10 @@ h6 {
 
 .site-content {
   flex: 1;
+}
+
+.mb-half {
+  margin-bottom: 0.5rem;
 }
 
 .mb1 {
@@ -105,7 +114,7 @@ h6 {
 }
 
 .content-gap {
-  margin-top: 3rem;
+  margin-top: 2rem;
 }
 
 @media only screen and (max-width: 768px) {
