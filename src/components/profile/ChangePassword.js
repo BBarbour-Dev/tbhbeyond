@@ -60,7 +60,7 @@ const ChangePassword = ({ firebase }) => {
           <button
             disabled={validation}
             type="submit"
-            className={`button is-small is-outlined is-danger ${loadingButton}`}
+            className={`button is-small is-danger ${loadingButton}`}
           >
             Change
           </button>

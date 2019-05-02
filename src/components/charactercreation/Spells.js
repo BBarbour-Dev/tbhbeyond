@@ -20,7 +20,7 @@ const Spells = ({ char }) => {
           )}
           <button
             disabled={notSpellcaster}
-            className="button is-pulled-right is-outlined is-danger mb1"
+            className="button is-pulled-right is-danger mb1"
             onClick={e => setAddSpellModal(!addSpellModal)}
           >
             Add {option}
@@ -159,7 +159,7 @@ const AddSpellModal = ({ toggle, char, option }) => {
           </div>
           <button
             disabled={validation}
-            className="button is-fullwidth is-outlined is-danger"
+            className="button is-fullwidth is-danger"
             onClick={handleSubmit}
           >
             Submit
@@ -237,7 +237,7 @@ const EditSpellModal = ({ toggleEdit, char, index }) => {
           </div>
           <button
             disabled={validation}
-            className="button is-fullwidth is-outlined is-danger"
+            className="button is-fullwidth is-danger"
             onClick={handleSubmit}
           >
             Submit

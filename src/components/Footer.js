@@ -7,13 +7,17 @@ const Footer = () => {
         <h6 className="is-size-7">
           <p>
             Get The Black Hack 2E on{" "}
-            <a href="https://www.drivethrurpg.com/product/255088/The-Black-Hack-Second-Edition">
+            <a
+              className="has-text-danger"
+              href="https://www.drivethrurpg.com/product/255088/The-Black-Hack-Second-Edition"
+            >
               DriveThru RPG.
             </a>
           </p>
           <p>Written by David Black.</p>
           <p>
-            Site created by <a href="https://github.com/steelvoltage">Brian</a>.
+            Site created by{" "}
+            <a href="https://github.com/steelvoltage">steelvoltage</a>.
           </p>
         </h6>
       </div>

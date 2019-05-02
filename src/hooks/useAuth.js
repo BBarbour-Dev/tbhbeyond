@@ -7,8 +7,8 @@ const useAuth = () => {
   useEffect(() => {
     const listener = firebase.onAuthListener(
       userAuth => {
-        localStorage.setItem("user", JSON.stringify(userAuth));
         setUser(userAuth);
+        localStorage.setItem("user", JSON.stringify(userAuth));
       },
       () => {
         localStorage.removeItem("user");

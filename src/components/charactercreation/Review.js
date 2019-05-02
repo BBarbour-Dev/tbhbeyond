@@ -13,10 +13,11 @@ const Review = ({ char, firebase, user, schema, history }) => {
     setLoading(true);
     firebase
       .addCharacter(character)
-      .then(() => {
+      .then(res => {
+        console.log(res);
         setLoading(false);
         setCharacter(schema);
-        history.push("/");
+        history.push(`/characters/${res.id}`);
       })
       .catch(err => {
         setError(err);
@@ -41,7 +42,7 @@ const Review = ({ char, firebase, user, schema, history }) => {
           )}
           <button
             disabled={validationErrors.length > 0}
-            className={`button is-fullwidth is-outlined is-danger ${isLoading}`}
+            className={`button is-fullwidth is-danger ${isLoading}`}
             onClick={e => handleSubmit(e)}
           >
             Finalize Character

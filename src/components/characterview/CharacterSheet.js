@@ -32,7 +32,7 @@ const CharacterSheet = ({ char, firebase, current, charID }) => {
     <>
       {editable ? (
         <button
-          className="button is-outlined is-danger is-pulled-right"
+          className="button is-danger is-pulled-right"
           onClick={() => setCharInfoModal(true)}
         >
           <span className="icon">
@@ -74,7 +74,7 @@ const CharacterSheet = ({ char, firebase, current, charID }) => {
       <div className="has-text-centered">
         <p>
           <button
-            className="button is-small is-outlined is-danger"
+            className="button is-small is-danger"
             onClick={e => clipboardCopy(e)}
           >
             <span className="icon is-small">
@@ -88,6 +88,7 @@ const CharacterSheet = ({ char, firebase, current, charID }) => {
             style={{ width: "25%" }}
             ref={urlRef}
             value={window.location.href.toString()}
+            readOnly
           />{" "}
           {copied ? (
             <span className="tag is-normal is-light">{copied}</span>

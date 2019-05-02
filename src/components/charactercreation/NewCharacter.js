@@ -46,10 +46,7 @@ const NewCharacter = ({ history }) => {
       <section className="content-gap">
         <div className="container">
           <div className="columns is-centered">
-            <div
-              className="column is-three-fifths box"
-              style={{ padding: "3rem" }}
-            >
+            <div className="column is-three-fifths box content-box">
               <h1 className="is-size-2 mb2">New Character</h1>
               <div className="columns is-centered">
                 <div className="column is-four-fifths ">

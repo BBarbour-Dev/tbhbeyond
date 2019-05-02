@@ -1,18 +1,11 @@
-import React, { useState, useContext } from "react";
-import { FirebaseContext } from "../../config/context";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
-const ForgetForm = ({ toggle, login }) => {
-  const [forgetModal, setForgetModal] = toggle;
-  const [loginModal, setLoginModal] = login;
-  const firebase = useContext(FirebaseContext);
+const ForgotForm = ({ firebase }) => {
   const [email, setEmail] = useState("");
   const [error, setError] = useState(null);
   const [sentPass, setSentPass] = useState(false);
   const validation = email === "";
-  const swapLogin = () => {
-    setForgetModal(!forgetModal);
-    setLoginModal(!loginModal);
-  };
   const cleanUp = () => {
     setEmail("");
   };
@@ -31,12 +24,11 @@ const ForgetForm = ({ toggle, login }) => {
   return (
     <form onSubmit={handleSubmit}>
       {sentPass && (
-        <div className="notification is-success">
-          Your recovery email has been sent.{" "}
-          <a href="#1" onClick={swapLogin}>
-            Login
-          </a>{" "}
-          with your new password.
+        <div className="message">
+          <div className="message-body">
+            Your recovery email has been sent. <Link to="/login">Login</Link>{" "}
+            with your new password.
+          </div>
         </div>
       )}
       <div className="field">
@@ -54,11 +46,11 @@ const ForgetForm = ({ toggle, login }) => {
       <input
         disabled={validation}
         type="submit"
-        className="button is-fullwidth"
+        className="button is-danger is-fullwidth"
         value="Recover Password"
       />
     </form>
   );
 };
 
-export default ForgetForm;
+export default ForgotForm;

@@ -245,7 +245,7 @@ export const CharInfoModal = ({ toggleEdit, char }) => {
           <hr />
           <button
             disabled={validation}
-            className="button is-fullwidth is-outlined is-danger"
+            className="button is-fullwidth is-danger"
             onClick={handleSubmit}
           >
             Submit

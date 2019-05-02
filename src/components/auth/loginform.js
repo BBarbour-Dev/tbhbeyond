@@ -1,13 +1,9 @@
-import React, { useState, useContext } from "react";
-import { FirebaseContext } from "../../config/context";
-import { withRouter } from "react-router-dom";
+import React, { useState } from "react";
 
-const LoginForm = ({ history, toggle }) => {
-  const firebase = useContext(FirebaseContext);
+const LoginForm = ({ history, firebase }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
-  const [loginModal, setLoginModal] = useState(toggle);
   const handleSubmit = e => {
     e.preventDefault();
     firebase
@@ -16,7 +12,7 @@ const LoginForm = ({ history, toggle }) => {
         setEmail("");
         setPassword("");
         setError(null);
-        setLoginModal(!loginModal);
+        history.push("/");
       })
       .catch(err => {
         setError(err);
@@ -47,15 +43,19 @@ const LoginForm = ({ history, toggle }) => {
           />
         </div>
       </div>
-      {error && <div className="notification is-danger">{error.message}</div>}
+      {error && (
+        <div className="message is-danger">
+          <div className="message-body">{error.message}</div>
+        </div>
+      )}
       <input
         disabled={validation}
         type="submit"
-        className="button is-fullwidth"
+        className="button is-fullwidth is-danger"
         value="Login"
       />
     </form>
   );
 };
 
-export default withRouter(LoginForm);
+export default LoginForm;

@@ -18,7 +18,7 @@ const CharInfoDisplay = ({ char }) => {
             Level {character.level} {character.charClass}{" "}
             <button
               style={{ marginTop: "0.35rem" }}
-              className="button is-outlined is-danger is-small"
+              className="button is-danger is-small"
               onClick={e => setClassModal(!classModal)}
             >
               Class Info

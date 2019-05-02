@@ -37,6 +37,11 @@ class Firebase {
 
   updateUserEmail = email => this.auth.currentUser.updateEmail(email);
 
+  sendEmailVerification = () =>
+    this.auth.currentUser.sendEmailVerification({
+      url: "http://localhost:3000/"
+    });
+
   // MERGE AUTH AND DB USER
 
   onAuthListener = (next, fallback) => {
@@ -52,6 +57,7 @@ class Firebase {
               uid: userAuth.uid,
               email: userAuth.email,
               avatar: userAuth.avatar,
+              emailVerified: userAuth.emailVerified,
               ...dbUser
             };
             next(userAuth);
@@ -76,6 +82,9 @@ class Firebase {
   addCharacter = character => this.db.collection("characters").add(character);
 
   character = id => this.db.collection("characters").doc(`${id}`);
+
+  userCharacters = uid =>
+    this.db.collection("characters").where("creatorUserId", "==", uid);
 }
 
 export default Firebase;

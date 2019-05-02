@@ -6,11 +6,7 @@ import {
   rollStartingHP
 } from "../../blackhackinfo/chargen";
 import { FeatureData } from "../../blackhackinfo/classfeatures";
-
-import warrior from "../../config/images/warrior.png";
-import thief from "../../config/images/thief.png";
-import cleric from "../../config/images/cleric.png";
-import wizard from "../../config/images/wizard.png";
+import ClassImg from "../ClassImg";
 
 const CharClass = ({ char }) => {
   const [character, setCharacter] = char;
@@ -130,7 +126,9 @@ const ClassFeatures = ({ data, charClass }) => {
   const currentClass = data[charClass];
   return (
     <div className="message-body">
-      <ClassImg charClass={charClass} />
+      <div className="has-text-centered">
+        <ClassImg charClass={charClass} size={128} />
+      </div>
       {currentClass.map((el, index) => {
         const length = currentClass.length - 1;
         return (
@@ -141,30 +139,6 @@ const ClassFeatures = ({ data, charClass }) => {
           </Fragment>
         );
       })}
-    </div>
-  );
-};
-
-const ClassImg = ({ charClass }) => {
-  const pickClassImg = charClass => {
-    switch (charClass) {
-      case "warrior":
-        return warrior;
-      case "thief":
-        return thief;
-      case "cleric":
-        return cleric;
-      case "wizard":
-        return wizard;
-      default:
-        return null;
-    }
-  };
-  return (
-    <div className="has-text-centered">
-      <figure className="image is-96x96 is-inline-block mb2">
-        <img src={pickClassImg(charClass)} alt={charClass} />
-      </figure>
     </div>
   );
 };

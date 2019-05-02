@@ -1,24 +1,20 @@
-import React, { useState, useContext } from "react";
-import { FirebaseContext } from "../../config/context";
-import { withRouter } from "react-router-dom";
+import React, { useState } from "react";
 
 import { defaultAvatar } from "../../config/constants";
 
-const LoginForm = ({ history, toggle }) => {
-  const firebase = useContext(FirebaseContext);
+const RegisterForm = ({ history, firebase }) => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passwordTwo, setPasswordTwo] = useState("");
   const [error, setError] = useState(null);
-  const [registerModal, setRegisterModal] = useState(toggle);
-  const cleanUp = () => {
+  const finish = () => {
     setUsername("");
     setEmail("");
     setPassword("");
     setPasswordTwo("");
     setError(null);
-    setRegisterModal(!registerModal);
+    history.push("/");
   };
   const handleSumbit = e => {
     e.preventDefault();
@@ -48,7 +44,8 @@ const LoginForm = ({ history, toggle }) => {
           );
         })
         .then(() => {
-          cleanUp();
+          firebase.sendEmailVerification();
+          finish();
         })
         .catch(err => {
           setError(err);
@@ -105,15 +102,19 @@ const LoginForm = ({ history, toggle }) => {
           />
         </div>
       </div>
-      {error && <div className="notification is-danger">{error.message}</div>}
+      {error && (
+        <div className="message is-danger">
+          <div className="message-body">{error.message}</div>
+        </div>
+      )}
       <input
         disabled={validation}
         type="submit"
-        className="button is-fullwidth"
+        className="button is-danger is-fullwidth"
         value="Register"
       />
     </form>
   );
 };
 
-export default withRouter(LoginForm);
+export default RegisterForm;
