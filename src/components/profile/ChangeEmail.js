@@ -60,10 +60,14 @@ const ChangeEmail = ({ user, firebase }) => {
             </div>
           </div>
           {completed && (
-            <div className="notification is-success">Email updated!</div>
+            <div className="message">
+              <div className="message-body">Email updated!</div>
+            </div>
           )}
           {error && (
-            <div className="notification is-danger">{error.message}</div>
+            <div className="message is-danger">
+              <div className="message-body">{error.message}</div>
+            </div>
           )}
           <button
             disabled={validation}

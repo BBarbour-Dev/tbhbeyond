@@ -20,7 +20,7 @@ const Landing = () => {
           <div className="columns is-centered">
             <div className="column is-one-fifth">
               <h2 className="is-size-5 has-text-grey-lighter has-text-centered">
-                Create, manage, and update your The Black Hack 2E characters.
+                Create, manage, and update your Black Hack 2E characters.
               </h2>
             </div>
           </div>

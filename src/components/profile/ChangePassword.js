@@ -52,10 +52,14 @@ const ChangePassword = ({ firebase }) => {
             </div>
           </div>
           {completed && (
-            <div className="notification is-success">Password updated!</div>
+            <div className="message">
+              <div className="message-body">Password updated!</div>
+            </div>
           )}
           {error && (
-            <div className="notification is-danger">{error.message}</div>
+            <div className="message is-danger">
+              <div className="message-body">{error.message}</div>
+            </div>
           )}
           <button
             disabled={validation}

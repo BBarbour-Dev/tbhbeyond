@@ -87,8 +87,8 @@ const ChangeAvatar = ({ firebase, user }) => {
                 </label>
               </div>
               {completed && (
-                <div className="notification is-success">
-                  Avatar upload completed!
+                <div className="message">
+                  <div className="message-body">Avatar upload completed!</div>
                 </div>
               )}
               {error && (
