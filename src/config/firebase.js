@@ -39,7 +39,7 @@ class Firebase {
 
   sendEmailVerification = () =>
     this.auth.currentUser.sendEmailVerification({
-      url: "http://localhost:3000/"
+      url: "www.tbhbeyond.com"
     });
 
   // MERGE AUTH AND DB USER
