@@ -10,6 +10,7 @@ const Footer = () => {
             <a
               className="has-text-danger"
               href="https://www.drivethrurpg.com/product/255088/The-Black-Hack-Second-Edition"
+              target="_blank"
             >
               DriveThru RPG.
             </a>

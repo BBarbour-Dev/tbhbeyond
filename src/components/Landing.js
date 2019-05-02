@@ -72,6 +72,7 @@ const Landing = () => {
                   <a
                     className="has-text-danger has-text-weight-bold"
                     href="https://www.drivethrurpg.com/product/255088/The-Black-Hack-Second-Edition"
+                    target="_blank"
                   >
                     Check it out!
                   </a>
