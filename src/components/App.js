@@ -4,10 +4,10 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { AuthRoute, VerifyRoute, HideRoute } from "./RouteProtect";
 
 import Navigation from "./Navigation";
-import Login from "./auth/Login";
-import Register from "./auth/Register";
-import ForgotPass from "./auth/ForgotPass";
-import VerifyEmail from "./auth/VerifyEmail";
+import Login from "./authentication/Login";
+import Register from "./authentication/Register";
+import ForgotPass from "./authentication/ForgotPass";
+import VerifyEmail from "./authentication/VerifyEmail";
 import Landing from "./Landing";
 import UserProfile from "./profile/UserProfile";
 import Error404 from "./Error404";
