@@ -20,7 +20,8 @@ const Landing = () => {
           <div className="columns is-centered">
             <div className="column is-one-fifth">
               <h2 className="is-size-5 has-text-grey-lighter has-text-centered is-hidden-touch">
-                Create, manage, and update your Black Hack 2E characters.
+                This unofficial app lets you create, manage, and update your
+                Black Hack 2E characters.
               </h2>
             </div>
           </div>
@@ -65,6 +66,7 @@ const Landing = () => {
                   Productions, it has become a Platinum Best Seller on
                   DrivethruRPG.{" "}
                 </p>
+                <p>This site was created by a humble fan who loves the RPG.</p>
                 <p
                   className="has-text-justified is-pulled-right"
                   style={{ marginBottom: "2rem" }}

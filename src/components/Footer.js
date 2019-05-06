@@ -17,7 +17,7 @@ const Footer = () => {
           </p>
           <p>Written by David Black.</p>
           <p>
-            Site created by{" "}
+            This unofficial fan site was created by{" "}
             <a href="https://github.com/steelvoltage">steelvoltage</a>.
           </p>
         </h6>
