@@ -66,7 +66,12 @@ const Landing = () => {
                   Productions, it has become a Platinum Best Seller on
                   DrivethruRPG.{" "}
                 </p>
-                <p>This site was created by a humble fan who loves the RPG.</p>
+                <p
+                  className="has-text-justified"
+                  style={{ textIndent: "1.5rem" }}
+                >
+                  This site was created by a humble fan who loves the RPG.
+                </p>
                 <p
                   className="has-text-justified is-pulled-right"
                   style={{ marginBottom: "2rem" }}
